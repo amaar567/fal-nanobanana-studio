@@ -62,14 +62,6 @@ npm run dev
 4. Click "Edit Image" and wait for processing
 5. Download your edited image
 
-### Generate Mode
-
-1. Switch to "Generate" mode
-2. Enter a detailed prompt describing the image you want to create
-3. Optionally add a negative prompt
-4. Click "Generate Image"
-5. Download the generated image
-
 ## API Configuration
 
 **Important:** The application uses fal.ai's nanobanana API. The endpoint URL in `backend/server.js` is set to `https://fal.run/fal-ai/nanobanana`. If fal.ai uses a different endpoint format, you may need to update the URL in the server code.
