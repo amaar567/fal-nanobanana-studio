@@ -29,6 +29,10 @@ if (FAL_API_KEY) {
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
 const API_TIMEOUT = 120000; // 120 seconds
+const MODEL_ENDPOINTS = {
+  nano: 'fal-ai/nano-banana/edit',
+  pro: 'fal-ai/nano-banana-pro/edit',
+};
 
 // Middleware
 app.use(cors());
@@ -54,14 +58,15 @@ const upload = multer({
 });
 
 // Utility function to call fal.ai API using the official client
-async function callFalAPI(inputPayload) {
+async function callFalAPI(inputPayload, modelId = 'nano') {
   if (!FAL_API_KEY) {
     throw new Error('FAL_API_KEY not configured');
   }
 
   try {
+    const endpoint = MODEL_ENDPOINTS[modelId] || MODEL_ENDPOINTS.nano;
     // Use fal.subscribe which handles queue polling automatically
-    const result = await fal.subscribe('fal-ai/nano-banana/edit', {
+    const result = await fal.subscribe(endpoint, {
       input: inputPayload,
       logs: true,
       onQueueUpdate: (update) => {
@@ -108,7 +113,7 @@ app.post('/api/edit-image', upload.single('image'), async (req, res) => {
     }
 
     // Validate prompt
-    const { prompt, negativePrompt, seed, numInferenceSteps } = req.body;
+    const { prompt, negativePrompt, seed, numInferenceSteps, model } = req.body;
     if (!prompt || !prompt.trim()) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
@@ -131,10 +136,11 @@ app.post('/api/edit-image', upload.single('image'), async (req, res) => {
     // Note: The nano-banana/edit API doesn't support negative_prompt, seed, or num_inference_steps
     // These parameters are not in the API schema
 
-    console.log(`[EDIT] Processing image edit with prompt: "${prompt.substring(0, 50)}..."`);
+    const modelId = model === 'pro' ? 'pro' : 'nano';
+    console.log(`[EDIT] Processing image edit (${modelId}) with prompt: "${prompt.substring(0, 50)}..."`);
 
     // Call fal.ai API
-    const data = await callFalAPI(payload);
+    const data = await callFalAPI(payload, modelId);
 
     console.log('[EDIT] Successfully processed image');
     // API returns { images: [{ url, ... }], description: "..." }
@@ -336,7 +342,7 @@ async function callSam2API(imageUrl) {
 // Generate image from text
 app.post('/api/generate-image', async (req, res) => {
   try {
-    const { prompt, negativePrompt, seed, numInferenceSteps, width, height } = req.body;
+    const { prompt, negativePrompt, seed, numInferenceSteps, width, height, model } = req.body;
 
     // Validate prompt
     if (!prompt || !prompt.trim()) {
@@ -381,10 +387,11 @@ app.post('/api/generate-image', async (req, res) => {
     payload.width = parsedWidth;
     payload.height = parsedHeight;
 
-    console.log(`[GENERATE] Generating image with prompt: "${prompt.substring(0, 50)}..."`);
+    const modelId = model === 'pro' ? 'pro' : 'nano';
+    console.log(`[GENERATE] Generating image (${modelId}) with prompt: "${prompt.substring(0, 50)}..."`);
 
     // Call fal.ai API
-    const data = await callFalAPI(payload);
+    const data = await callFalAPI(payload, modelId);
 
     console.log('[GENERATE] Successfully generated image');
     res.json(data);

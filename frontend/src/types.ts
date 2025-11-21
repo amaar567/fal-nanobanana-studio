@@ -11,10 +11,13 @@ export interface ApiError {
 
 export type Mode = 'edit' | 'generate';
 
+export type ModelId = 'nano' | 'pro';
+
 export interface EditImageParams {
   image: Blob;
   prompt: string;
   negativePrompt?: string;
+  model?: ModelId;
 }
 
 export interface InpaintImageParams {
@@ -28,4 +31,5 @@ export interface GenerateImageParams {
   negativePrompt?: string;
   width?: number;
   height?: number;
+  model?: ModelId;
 }

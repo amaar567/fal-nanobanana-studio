@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import Cropper, { Area } from 'react-easy-crop';
-import { Mode } from './types';
+import { Mode, ModelId } from './types';
 import { editImage, generateImage, segmentImage, checkHealth } from './api';
 import { validateImageFile, extractImageUrl, dataUrlToBlob, downloadImage, getTimestamp } from './utils';
 import './App.css';
@@ -81,6 +81,7 @@ function App() {
   const [adjustmentCount, setAdjustmentCount] = useState(1);
   const [aspect, setAspect] = useState<number | undefined>(3 / 2);
   const [isSegmenting, setIsSegmenting] = useState(false);
+  const [model, setModel] = useState<ModelId>('nano');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const menuItems = ['Export', 'Help'];
@@ -228,6 +229,18 @@ function App() {
         'Apply vintage matte film look, muted shadows, gentle halation, warm highlights, dusted texture, analog imperfections',
       negativePrompt: 'heavy grain, scratches, frame border, text',
       icon: SparklesIcon,
+    },
+  ];
+  const modelOptions: Array<{ id: ModelId; label: string; description: string }> = [
+    {
+      id: 'nano',
+      label: 'Nano Banana',
+      description: 'Fast & lightweight',
+    },
+    {
+      id: 'pro',
+      label: 'Nano Banana Pro',
+      description: 'SOTA fidelity',
     },
   ];
   const aspectPresets = [
@@ -870,6 +883,7 @@ const registerLayer = useCallback(
         image: await dataUrlToBlob(image),
         prompt: filterPrompt.trim(),
         negativePrompt: negativePrompt.trim() || undefined,
+        model,
       });
 
       const imageUrl = extractImageUrl(data);
@@ -913,6 +927,7 @@ const registerLayer = useCallback(
         image: blob,
         prompt: action.prompt.trim(),
         negativePrompt: action.negativePrompt?.trim() || undefined,
+        model,
       });
 
       const imageUrl = extractImageUrl(data);
@@ -1032,12 +1047,14 @@ const registerLayer = useCallback(
           image: blob,
           prompt: prompt.trim(),
           negativePrompt: negativePrompt.trim() || undefined,
+          model,
         });
       } else {
         // Call generate API
         data = await generateImage({
           prompt: prompt.trim(),
           negativePrompt: negativePrompt.trim() || undefined,
+          model,
         });
       }
 
@@ -1187,6 +1204,20 @@ const registerLayer = useCallback(
                 <Wand2 size={16} />
                 Generate
               </button>
+            </div>
+            <div className="model-toggle chips">
+              {modelOptions.map((option) => (
+                <button
+                  key={option.id}
+                  className={`model-chip ${model === option.id ? 'active' : ''}`}
+                  onClick={() => setModel(option.id)}
+                  type="button"
+                  disabled={isLoading}
+                >
+                  <strong>{option.label}</strong>
+                  <span>{option.description}</span>
+                </button>
+              ))}
             </div>
           </div>
 
